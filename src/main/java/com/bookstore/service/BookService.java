@@ -16,9 +16,7 @@ public class BookService {
     public Iterable<Book> getAllBook() {
         return bookRepository.findAll();
     }
-    public Iterable<Book> getAllBooks() {
-        return bookRepository.findBooks();
-    }
+
 
     public Book create(Book book) {
         return bookRepository.save(book);
@@ -28,10 +26,7 @@ public class BookService {
         bookRepository.deleteById(id);
         return;
     }
-    public Book findBookById(Integer id) {
-        return bookRepository.findBooksById(id);
 
-    }
 
     public Optional<Book> getBook(Integer idd) {
         return bookRepository.findById(idd);

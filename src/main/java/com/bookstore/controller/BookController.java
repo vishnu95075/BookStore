@@ -12,12 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/book")
 public class BookController {
 
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/books")
+    @GetMapping()
     public ResponseEntity<List<Book>> getAllBook() {
         try {
             return ResponseEntity.status(200).body((List<Book>) bookService.getAllBook());
@@ -26,27 +27,7 @@ public class BookController {
         }
         return null;
     }
-    @GetMapping("/bookquery")
-    public ResponseEntity<List<Book>> findBooks() {
-        try {
-            return ResponseEntity.status(200).body((List<Book>) bookService.getAllBook());
-        } catch (Exception e) {
-            System.out.println("Here Book Error"+e);
-        }
-        return null;
-    }
-    @GetMapping("/bookquery/{id}")
-    public ResponseEntity<Book> findBookById(@PathVariable String id) {
-        try {
-            Integer idd = Integer.parseInt(id);
-           Book book= bookService.findBookById(idd);
-            return ResponseEntity.status(201).body(book);
-        } catch (Exception e) {
-            System.out.println("Here Book Error" + e);
-            return ResponseEntity.status(500).body(null);
-        }
-    }
-    @PostMapping("/book")
+    @PostMapping()
     public ResponseEntity<Book> getAllBook(@RequestBody Book book) {
         try {
             Book book1= bookService.create(book);
@@ -56,7 +37,7 @@ public class BookController {
            return ResponseEntity.status(500).body(null);
         }
     }
-    @PostMapping("/book/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<Book> getAllBook(@PathVariable String id,@RequestBody Book book) {
         try {
             Book book1= bookService.create(book);
@@ -66,7 +47,7 @@ public class BookController {
             return ResponseEntity.status(500).body(null);
         }
     }
-    @DeleteMapping("/book/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> getAllBook(@PathVariable String id) {
         try {
             Integer idd = Integer.parseInt(id);
@@ -77,7 +58,7 @@ public class BookController {
             return ResponseEntity.status(500).body("Book is not successfully deleted");
         }
     }
-    @GetMapping("/book/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<?>> getBookById(@PathVariable String id) {
         try {
             Integer idd = Integer.parseInt(id);
